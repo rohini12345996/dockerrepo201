@@ -1,0 +1,23 @@
+version: '3'
+services:
+ mysql:
+  image: mysql:5.7
+  ports:
+   - "3306:3306"
+  container_name: mysql-standalone
+  network_mode: host
+  environment:
+   MYSQL_ROOT_PASSWORD: Welcome123 
+   MYSQL_DATABASE: shopingcart
+   MYSQL_USER:  shopingcart
+   MYSQL_PASSWORD: Welcome123
+
+ spring-docker201app:
+  image: rohini/dockerrepo201:dockerimage
+  restart: always
+  network_mode: host
+  container_name: dockerimage
+  depends_on:
+   - mysql-standalone
+  ports:
+   - "8088:8088"
